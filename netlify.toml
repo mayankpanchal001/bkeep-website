@@ -1,5 +1,8 @@
 [build]
   command = "npm run build"
+  # Publish directory for Next.js with SSR/API routes
+  # This overrides any publish directory set in Netlify UI
+  publish = ".next"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
