@@ -1,3 +1,5 @@
+import { contactInfo } from "@/lib/data/contact";
+
 export default function StructuredData() {
   const localBusinessSchema = {
     "@context": "https://schema.org",
@@ -8,14 +10,14 @@ export default function StructuredData() {
     "url": "https://bkeep.ca",
     "logo": "https://bkeep.ca/Logo.png",
     "image": "https://bkeep.ca/og-image.png",
-    "email": "info@bkeep.ca",
+    "email": contactInfo.email,
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "2585 Skymark Ave",
-      "addressLocality": "Mississauga",
-      "addressRegion": "ON",
-      "postalCode": "L4W 4L5",
-      "addressCountry": "CA"
+      "streetAddress": contactInfo.address.street,
+      "addressLocality": contactInfo.address.city,
+      "addressRegion": contactInfo.address.province,
+      "postalCode": contactInfo.address.postalCode,
+      "addressCountry": contactInfo.address.country
     },
     "serviceType": "Bookkeeping and Accounting Services",
     "areaServed": {

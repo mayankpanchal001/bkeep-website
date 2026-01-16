@@ -1,6 +1,6 @@
 "use client";
 
-import { Facebook, Instagram, Twitter } from "lucide-react";
+import { socialLinks } from "@/lib/data/contact";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -14,6 +14,7 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
   { label: "Home", href: "/" },
+  { label: "About Us", href: "/about-us" },
   {
     label: "Services",
     href: "/services",
@@ -37,27 +38,13 @@ const menuItems: MenuItem[] = [
       { label: "Brampton", href: "/locations/brampton" },
     ],
   },
-  { label: "About Us", href: "/about-us" },
   { label: "Contact Us", href: "/contact-us" },
 ];
 
-const socialIcons = [
-  {
-    icon: Facebook,
-    url: "https://www.facebook.com/",
-    label: "Facebook",
-  },
-  {
-    icon: Instagram,
-    url: "https://www.instagram.com/",
-    label: "Instagram",
-  },
-  {
-    icon: Twitter,
-    url: "https://www.twitter.com/",
-    label: "Twitter",
-  },
-];
+// Filter social links for header (exclude LinkedIn)
+const headerSocialLinks = socialLinks.filter(
+  (link) => link.label !== "LinkedIn"
+);
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -301,7 +288,7 @@ const Header = () => {
               </ul>
 
               <div className="social-icons">
-                {socialIcons.map((social) => {
+                {headerSocialLinks.map((social) => {
                   const IconComponent = social.icon;
                   return (
                     <a
