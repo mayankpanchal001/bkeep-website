@@ -1,0 +1,22 @@
+# Modern browsers that support ES2020+
+# This reduces polyfills and bundle size
+
+# Browsers with >0.2% market share
+> 0.2%
+
+# Last 2 versions of major browsers
+last 2 versions
+
+# Not dead browsers (still receiving security updates)
+not dead
+
+# Modern browsers that support ES2020 features
+# Excludes IE 11 and older browsers that need polyfills
+not IE 11
+not op_mini all
+
+# Explicitly target modern browsers
+Chrome >= 87
+Firefox >= 78
+Safari >= 14
+Edge >= 88

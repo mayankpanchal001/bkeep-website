@@ -1,17 +1,9 @@
 import LenisProvider from "@/components/LenisProvider";
 import type { Metadata } from "next";
-import { EB_Garamond } from "next/font/google";
 import "./globals.css";
 
-const ebGaramond = EB_Garamond({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-eb-garamond",
-  display: "swap",
-  preload: true,
-  fallback: ["Georgia", "serif"],
-  adjustFontFallback: true,
-});
+// Load EB Garamond via CSS link tag to avoid build-time fetch issues
+// The font is loaded in the head section below
 
 // Google Sans Flex is loaded via link tag in head section
 
@@ -108,6 +100,10 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;700&display=swap"
           rel="stylesheet"
         />
+        <link
+          href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://cdn.mouseflow.com" />
         <link rel="preconnect" href="https://analytics.ahrefs.com" />
@@ -166,7 +162,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${ebGaramond.variable} font-sans`}>
+      <body className="font-sans">
         <LenisProvider>{children}</LenisProvider>
       </body>
     </html>

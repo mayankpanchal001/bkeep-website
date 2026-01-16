@@ -13,7 +13,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 interface InsightCategory {
   name: string;
@@ -48,7 +48,7 @@ interface InsightsResponse {
   };
 }
 
-export default function Insights() {
+function InsightsContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [insights, setInsights] = useState<InsightPost[]>([]);
@@ -524,5 +524,25 @@ export default function Insights() {
         </div>
       </section>
     </main>
+  );
+}
+
+export default function Insights() {
+  return (
+    <Suspense
+      fallback={
+        <main className="main min-h-dvh" id="insights-page">
+          <section className="insights-archive py-16 lg:py-24 bg-neutral">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center py-12">
+                <p className="text-secondary text-lg">Loading insights...</p>
+              </div>
+            </div>
+          </section>
+        </main>
+      }
+    >
+      <InsightsContent />
+    </Suspense>
   );
 }

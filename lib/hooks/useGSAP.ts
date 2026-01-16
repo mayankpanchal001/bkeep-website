@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, RefObject, useState } from 'react';
-import { gsap, ScrollTrigger } from '@/lib/animations';
+import { gsap, ScrollTrigger } from "@/lib/animations";
+import { RefObject, useEffect, useRef, useState } from "react";
 
 export const useGSAP = (
   callback: (context: { scope: HTMLElement | null }) => void,
-  dependencies: any[] = []
+  dependencies: unknown[] = []
 ) => {
   const scopeRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     const context = gsap.context(() => {
       callback({ scope: scopeRef.current });
@@ -19,7 +19,10 @@ export const useGSAP = (
     return () => {
       context.revert();
       ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.vars.trigger && scopeRef.current?.contains(trigger.vars.trigger as HTMLElement)) {
+        if (
+          trigger.vars.trigger &&
+          scopeRef.current?.contains(trigger.vars.trigger as HTMLElement)
+        ) {
           trigger.kill();
         }
       });
@@ -40,7 +43,7 @@ export const useScrollReveal = (
   } = {}
 ) => {
   useEffect(() => {
-    if (!ref.current || typeof window === 'undefined') return;
+    if (!ref.current || typeof window === "undefined") return;
 
     const {
       delay = 0,
@@ -61,12 +64,14 @@ export const useScrollReveal = (
         y: 0,
         duration,
         delay,
-        ease: 'power2.out',
+        ease: "power2.out",
         scrollTrigger: {
           trigger: ref.current,
-          start: 'top 85%',
-          end: 'bottom 20%',
-          toggleActions: once ? 'play none none none' : 'play none none reverse',
+          start: "top 85%",
+          end: "bottom 20%",
+          toggleActions: once
+            ? "play none none none"
+            : "play none none reverse",
         },
       }
     );
@@ -78,7 +83,14 @@ export const useScrollReveal = (
         }
       });
     };
-  }, [ref, options.delay, options.duration, options.y, options.opacity, options.once]);
+  }, [
+    ref,
+    options.delay,
+    options.duration,
+    options.y,
+    options.opacity,
+    options.once,
+  ]);
 };
 
 // Hook equivalent to framer-motion's useInView
@@ -89,13 +101,13 @@ export const useInView = (
   const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
-    if (!ref.current || typeof window === 'undefined') return;
+    if (!ref.current || typeof window === "undefined") return;
 
-    const { once = true, margin = '-100px' } = options;
+    const { once = true, margin = "-100px" } = options;
 
     const scrollTrigger = ScrollTrigger.create({
       trigger: ref.current,
-      start: `top ${margin.includes('-') ? 'bottom' : '85%'}`,
+      start: `top ${margin.includes("-") ? "bottom" : "85%"}`,
       onEnter: () => {
         setIsInView(true);
         if (once) {
